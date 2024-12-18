@@ -1,0 +1,54 @@
+CLASS UTILE POUR LA PROGRAMMATION DU LCD 
+LCM - fichier : lcm_so1602dtr_m_fw.cpp   et   lcm_so1602dtr_m_fw.h 
+
+
+LCD => Tableau de [0, 31] 
+      [0, 15] = premiere ligne
+      [16, 31] = deuxieme ligne 
+
+
+// **** Creer un objet LCD **** // 
+ 
+LCM afficheur.(&DDRC, &PORTC);
+
+// **** Effacer tous sur LCD **** // 
+
+afficheur.clear(); 
+
+// **** Ecrire des caracteres sur le LCD **** // 
+
+afficheur.put('t').put('e').put('s').put('t');   DISPLAY : test
+
+afficheur.put('1');                              DISPLAY : test1 
+
+// **** Ecrire une chaines sur le LCD **** // 
+
+Parametre : chaine, index, true=clear false=nothing
+afficheur.write("Bonjour", 16, true);                  DISPLAY : 
+                                                                 Bonjour 
+
+afficheur.write("Ligne1", 0, false);                   DISPLAY : Ligne1
+                                                                 Bonjour 
+
+
+// **** Surcharge d'operateur **** // 
+
+// Remplacement du contenu actuel par une nouvelle chaine, = -> reset completement et ajoute
+afficheur = "nouveau truc ";
+w();
+
+// Ajout de trois nombres hexadecimaux avec des espaces entre chaque, << -> continue decrire a partir de l'index
+afficheur << 1 << ' ' << -179 << ' ' << 6;
+w();
+
+// **** placer l'index **** //
+
+afficheur.set_bc_index(9);     // TJR AVOIR L'INDEX A BONNE PLACE 
+
+afficheur.en_blink(true);     // TJR ACTIVER !! PLUS FACILE A SUIVRE POUR L'UTILISATEUR !!!
+
+
+
+
+
+

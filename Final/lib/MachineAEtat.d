@@ -1,0 +1,1 @@
+MachineAEtat.o: MachineAEtat.cpp
